@@ -1,0 +1,4 @@
+#!/bin/bash
+export PATH="~/.bun/bin:$PATH"
+
+bun x lint-staged
