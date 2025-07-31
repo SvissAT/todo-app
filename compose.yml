@@ -1,0 +1,30 @@
+services:
+    web:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        ports:
+            - 3000:3000
+        environment:
+            - REDIS_URL=redis://redis:6379
+        depends_on:
+            - redis
+    redis:
+        image: redis:8-alpine
+        restart: unless-stopped
+        command: >
+            redis-server
+              --appendonly yes
+              --appendfsync everysec
+              --no-appendfsync-on-rewrite yes
+              --auto-aof-rewrite-percentage 50
+              --auto-aof-rewrite-min-size 32mb
+              --aof-rewrite-incremental-fsync yes
+              --aof-use-rdb-preamble yes
+              --aof-load-truncated yes
+              --maxmemory-policy noeviction
+        volumes:
+            - redis-data:/data
+
+volumes:
+    redis-data:
