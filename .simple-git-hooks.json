@@ -1,3 +1,0 @@
-{
-    "pre-commit": "bun pretty-quick --staged"
-}
