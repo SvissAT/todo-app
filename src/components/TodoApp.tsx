@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
+import { useAutoAnimate } from "@formkit/auto-animate/react"
 import { useEffect, useMemo, useState } from "react"
 
 interface TodoItem {
@@ -16,6 +17,8 @@ export default function TodoApp() {
     const [persistence, setPersistence] = useState<boolean | null>(null)
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState<string | null>(null)
+
+    const [animationParent] = useAutoAnimate()
 
     useEffect(() => {
         let cancelled = false
@@ -124,7 +127,7 @@ export default function TodoApp() {
                         Add
                     </Button>
                 </div>
-                <ul className="mt-4 space-y-2">
+                <ul ref={animationParent} className="mt-4 space-y-2">
                     {items.map((t) => (
                         <li
                             key={t.id}
