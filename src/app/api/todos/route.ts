@@ -12,6 +12,7 @@ function json(data: unknown, init?: ResponseInit) {
 }
 
 async function isRedisAvailable(): Promise<boolean> {
+    if (!Bun.env.REDIS_URL) return false // if no REDIS_URL is set, we can't use Redis
     try {
         await redis.ping()
         return true
