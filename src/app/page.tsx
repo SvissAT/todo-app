@@ -10,6 +10,9 @@ export default function Home() {
                 <p className="text-muted-foreground text-sm">
                     Running on {Bun.version}
                 </p>
+                <p className="text-muted-foreground text-sm">
+                    Hello {process.env.NAME || "World"}!
+                </p>
             </div>
             <TodoApp />
         </main>
